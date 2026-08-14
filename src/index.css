@@ -279,6 +279,23 @@
   animation: blink 1.4s steps(1, end) infinite;
 }
 
+/* Idle float for the desktop chibis. Presentation only — a few pixels of
+   drift, nothing that alters the drawing. */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0);
+  }
+}
+
+.animate-bob {
+  animation: bob var(--bob-duration, 5s) ease-in-out infinite;
+  will-change: transform;
+}
+
 /* Cursor trail sparkle — spawns, drifts, fades, then unmounts. */
 @keyframes sparkle-out {
   0% {
@@ -315,7 +332,8 @@
   .animate-drift-d,
   .animate-twinkle,
   .animate-marquee,
-  .animate-blink {
+  .animate-blink,
+  .animate-bob {
     animation: none !important;
   }
 

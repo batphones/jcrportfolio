@@ -33,6 +33,29 @@ marquee, an odometer hit counter, stickers, CRT scanlines and a sparkle cursor
 trail. All of it is decorative except the menu bar, whose items are real
 shortcuts to the windows.
 
+## The chibi artwork
+
+`public/chibi/` holds six chibi drawings placed around the desktop, plus one in
+the About window. They are the **original files**, altered only by:
+
+1. flood-filling the white background to transparent, starting from the image
+   border — so whites *inside* the drawing (shirts, skin, the thought bubble)
+   are never touched, and
+2. cropping away the resulting empty margin.
+
+No scaling, mirroring, recolouring or redrawing. Every size on screen is applied
+in CSS at display time. `src/components/Chibi.jsx` deliberately has no flip or
+filter option so that stays true.
+
+Placement lives in `src/components/Desktop.jsx`. Chibis render *first* inside
+`<main>` so icons and badges always sit in front of them, and every one is
+`pointer-events-none` so it can never swallow a click meant for an icon.
+
+> **Note on page weight:** the six PNGs total ~3.7 MB, because they're kept at
+> full resolution. They are the heaviest thing on the page by far. If load time
+> matters more than keeping the pixels byte-identical, generate downscaled or
+> WebP copies for display — the originals live in your Downloads folder.
+
 ## Stack
 
 - **React 19 + Vite** — app and dev server

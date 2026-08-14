@@ -1,4 +1,4 @@
-import { about } from '../data/content'
+import { about, chibis } from '../data/content'
 import { ArtBlock, Eyebrow, ImagePlaceholder, Slot } from '../components/primitives'
 
 /**
@@ -45,6 +45,17 @@ export function AboutWindow() {
               </p>
               <p className="mt-1 text-[10px] leading-snug text-ink/65">{about.ocProfiles.blurb}</p>
             </div>
+
+            {/* The beach illustration lives here — it's the one chibi that's a
+                full scene rather than a sticker, so it gets real space. */}
+            <img
+              src={chibis.beach.src}
+              alt={chibis.beach.alt}
+              loading="lazy"
+              decoding="async"
+              draggable={false}
+              className="mx-auto block w-full max-w-[280px] select-none"
+            />
 
             <div className="grid flex-1 grid-cols-3 gap-2">
               {about.ocProfiles.characters.map((oc) => (

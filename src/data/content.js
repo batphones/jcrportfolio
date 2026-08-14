@@ -42,6 +42,43 @@ export const trinkets = {
   bestViewed: 'best viewed at 1024 x 768',
 }
 
+/**
+ * Chibi artwork scattered around the desktop.
+ *
+ * The PNGs in /public/chibi/ are the original drawings with only the white
+ * background flood-filled to transparent and the empty margin cropped — no
+ * scaling, recolouring or redrawing. Every size below is applied in CSS at
+ * display time, so the files themselves stay untouched.
+ *
+ * `w` is the rendered width; `pos` places it on the ≥lg desktop.
+ */
+export const chibis = {
+  peek: {
+    src: '/chibi/chibi-1-peek.png',
+    alt: 'Chibi of a dark-haired elf boy in armour, resting his chin on his hand',
+  },
+  kick: {
+    src: '/chibi/chibi-2-kick.png',
+    alt: 'Chibi of a winking girl with a spotted leopard tail, mid-kick',
+  },
+  sit: {
+    src: '/chibi/chibi-3-sit.png',
+    alt: 'Chibi of a flustered girl sitting down, steam and hearts around her',
+  },
+  crouch: {
+    src: '/chibi/chibi-4-crouch.png',
+    alt: 'Chibi of a startled girl crouching, with an exclamation mark above her',
+  },
+  closeup: {
+    src: '/chibi/chibi-5-closeup.png',
+    alt: 'Close-up chibi of a delighted girl with sparkling star-shaped eyes',
+  },
+  beach: {
+    src: '/chibi/chibi-6-beach.png',
+    alt: 'Chibi of a girl in a sunhat sitting on a beach, daydreaming about friends',
+  },
+}
+
 /** The "reminders!" notification banner on the desktop. */
 export const reminders = {
   banner: 'reminders!',
