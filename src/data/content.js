@@ -39,7 +39,6 @@ export const trinkets = {
   visitorCount: 131072, // fake hit counter seed
   visitorLabel: 'visitors',
   construction: 'under construction',
-  bestViewed: 'best viewed at 1024 x 768',
 }
 
 /**

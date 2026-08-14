@@ -56,6 +56,13 @@ Placement lives in `src/components/Desktop.jsx`. Chibis render *first* inside
 `<main>` so icons and badges always sit in front of them, and every one is
 `pointer-events-none` so it can never swallow a click meant for an icon.
 
+**Sizing them in px is a trap.** The featured block is sized in `vw`, so a
+chibi given a fixed pixel width that clears it at 1440x900 will collide with
+it at 1024x700 — the block grows relative to the canvas as the canvas shrinks.
+Anything sharing a lane with it uses `fitHeight` plus an `h-…%` class instead,
+so it scales with the desktop. The two chibis in the side lanes are also
+hidden below 1280px wide or 760px tall, where there is simply no lane left.
+
 > **Note on page weight:** the six PNGs total ~3.7 MB, because they're kept at
 > full resolution. They are the heaviest thing on the page by far. If load time
 > matters more than keeping the pixels byte-identical, generate downscaled or

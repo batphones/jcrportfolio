@@ -6,7 +6,7 @@ import { DesktopIcon } from './DesktopIcon'
 import { Dock } from './Dock'
 import { MenuBar } from './MenuBar'
 import { Eyebrow } from './primitives'
-import { BestViewedBadge, ConstructionBadge, HitCounter, Ticker } from './Y2kWidgets'
+import { ConstructionBadge, HitCounter, Ticker } from './Y2kWidgets'
 import { useWindows } from '../windows/WindowContext'
 
 /**
@@ -54,7 +54,7 @@ const ICONS = [
     kind: 'comms',
     variant: 'folder',
     title: 'Socials & apps',
-    pos: 'right-[3%] top-[70%]',
+    pos: 'right-[2%] bottom-[4%]',
   },
 ]
 
@@ -137,14 +137,28 @@ export function Desktop() {
         <main className="relative z-10 hidden flex-1 lg:block">
           {/* Free-floating chibis go first, so icons and badges paint in front
               of them. The two that perch *on top of* something are rendered
-              after their panel instead — see below. */}
-          <Chibi name="kick" width={190} bob={7.5} className="top-[47%] right-[14%]" />
-          <Chibi name="crouch" width={172} bob={6} className="top-[58%] left-[10%]" />
+              after their panel instead — see below.
+
+              These two sit in the side lanes beside the featured block, which
+              is sized in vw: below 1280px wide (or on a short screen) there is
+              no lane left for them, so they're hidden rather than overlapped. */}
+          <Chibi
+            name="kick"
+            bob={7.5}
+            fitHeight
+            className="top-[56%] right-[12%] h-[30%] max-xl:hidden [@media(max-height:760px)]:hidden"
+          />
+          <Chibi
+            name="crouch"
+            bob={6}
+            fitHeight
+            className="top-[54%] left-[14%] h-[28%] max-xl:hidden [@media(max-height:760px)]:hidden"
+          />
 
           {/* Centred under the featured block, sitting on the announcement bar:
               bottom-0 is <main>'s floor, and the ticker starts immediately
               below it. */}
-          <Chibi name="closeup" width={200} className="bottom-0 left-1/2 -translate-x-1/2" />
+          <Chibi name="closeup" fitHeight className="bottom-0 left-1/2 h-[22%] -translate-x-1/2" />
 
           {/* The banner sits lower than the wireframe's so the chibi leaning on
               it has somewhere to go without colliding with the menu bar. */}
@@ -167,7 +181,7 @@ export function Desktop() {
           ))}
 
           {/* centre column: title + featured block */}
-          <div className="absolute top-[45%] left-1/2 flex w-[44vw] max-w-[560px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-24">
+          <div className="absolute top-[45%] left-1/2 flex w-[40vw] max-w-[560px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-24">
             <Title />
 
             {/* She comes *after* the block, so she sits on top of it — perched
@@ -181,7 +195,6 @@ export function Desktop() {
           {/* Y2K trinkets, tucked into the empty corners */}
           <ConstructionBadge className="absolute top-[6%] left-[27%]" />
           <HitCounter className="absolute bottom-[6%] left-[4%]" />
-          <BestViewedBadge className="absolute right-[4%] bottom-[7%]" />
         </main>
 
         {/* ====================== < lg: simplified stacked layout ============= */}
@@ -221,7 +234,6 @@ export function Desktop() {
           <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
             <ConstructionBadge />
             <HitCounter />
-            <BestViewedBadge />
           </div>
 
           {/* Same idea as the desktop: she peeks up from behind the ticker. */}

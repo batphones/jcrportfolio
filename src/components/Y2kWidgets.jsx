@@ -67,17 +67,3 @@ export function ConstructionBadge({ className = '' }) {
     </div>
   )
 }
-
-/** "best viewed at…" plaque. */
-export function BestViewedBadge({ className = '' }) {
-  return (
-    <div
-      className={`bevel-out rotate-3 rounded-[4px] border-2 border-ink/50 bg-blush px-2.5 py-1 ${className}`}
-      aria-hidden="true"
-    >
-      <span className="text-[9px] tracking-[0.12em] text-ink/75 uppercase">
-        {trinkets.bestViewed}
-      </span>
-    </div>
-  )
-}
