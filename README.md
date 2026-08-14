@@ -17,6 +17,22 @@ npm run dev
 `npm run build` produces a static bundle in `dist/` — deployable to Netlify,
 Vercel, GitHub Pages or any static host. No backend, no API keys.
 
+## Look
+
+The palette is the "Earthy Tones" + "Soft Sand" moodboard, declared as tokens in
+`src/index.css`. Everything on screen — window chrome, dock, badges — is drawn
+from it; there are no off-palette colours left.
+
+The wallpaper is a single-hue **olive ramp** (`--color-olive-50` … `-900`) that
+walks from pale sage at the top down to deep olive at the bottom, with four
+faint drifting blobs and a twinkling star field over it. The blob opacities are
+deliberately low: turn them up and they wash the ramp out into flat sage.
+
+On top of that sits a Y2K layer — a menu bar with a live clock, a scrolling
+marquee, an odometer hit counter, stickers, CRT scanlines and a sparkle cursor
+trail. All of it is decorative except the menu bar, whose items are real
+shortcuts to the windows.
+
 ## Stack
 
 - **React 19 + Vite** — app and dev server
@@ -88,4 +104,11 @@ src/
 - **Responsive** — below 1024px the scattered-icon desktop is replaced by a
   simple stacked layout with an icon grid, since a literal desktop doesn't
   translate to a phone.
-- **Reduced motion** — animations are cut for users who ask for it.
+- **Reduced motion** — every ambient loop (drifting blobs, twinkling stars,
+  marquee, blinking) is switched off rather than snapped to a frozen mid-frame,
+  and the cursor trail doesn't render at all.
+- **Cursor sparkles** are skipped on coarse/touch pointers, throttled to ~14 a
+  second, capped at 18 on screen, and each one clears its own timer on unmount.
+- **Stacking** — the window layer is `position: fixed`, which makes it its own
+  stacking context. Its `z-50` is what lifts windows above the desktop; the
+  per-window z-indexes inside are local to that layer.

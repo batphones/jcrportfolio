@@ -1,8 +1,11 @@
 import { artworks, featured, reminders, site } from '../data/content'
+import { CursorSparkles } from './CursorSparkles'
 import { DesktopBackground } from './DesktopBackground'
 import { DesktopIcon } from './DesktopIcon'
 import { Dock } from './Dock'
+import { MenuBar } from './MenuBar'
 import { Eyebrow } from './primitives'
+import { BestViewedBadge, ConstructionBadge, HitCounter, Ticker } from './Y2kWidgets'
 import { useWindows } from '../windows/WindowContext'
 
 /**
@@ -59,25 +62,13 @@ const DOCK_ITEMS = [
   { id: 'creds', label: 'creds', kind: 'creds', title: 'Credits' },
 ]
 
-/** Decorative macOS traffic lights. */
-function ChromeBar() {
-  return (
-    <div className="relative z-10 flex shrink-0 items-center gap-2 border-b border-ink/20 bg-blush-cream/80 px-3 py-2 backdrop-blur-sm">
-      <span className="size-3 rounded-full border border-ink/20 bg-[#ED6A5E]" aria-hidden="true" />
-      <span className="size-3 rounded-full border border-ink/20 bg-[#F5BF4F]" aria-hidden="true" />
-      <span className="size-3 rounded-full border border-ink/20 bg-[#61C554]" aria-hidden="true" />
-      <span className="ml-2 truncate text-[10px] tracking-wider text-ink/45">
-        jinglecatrock — portfolio
-      </span>
-    </div>
-  )
-}
-
 function Title() {
   return (
     <div className="text-center">
-      <p className="font-display text-xl italic sm:text-2xl lg:text-[26px]">{site.handle}</p>
-      <h1 className="text-[38px] leading-none font-bold tracking-tight sm:text-5xl lg:text-6xl">
+      <p className="font-display text-xl italic text-ink [text-shadow:0_1px_0_rgba(239,240,228,0.55)] sm:text-2xl lg:text-[26px]">
+        {site.handle}
+      </p>
+      <h1 className="text-[38px] leading-none font-bold tracking-tight text-ink [text-shadow:0_2px_0_rgba(239,240,228,0.45)] sm:text-5xl lg:text-6xl">
         {site.title}
       </h1>
     </div>
@@ -90,10 +81,10 @@ function RemindersBanner({ onOpen, className = '' }) {
     <button
       type="button"
       onClick={onOpen}
-      className={`no-tap-flash group flex items-center justify-center rounded-[8px] border border-ink/40 bg-slot/80 px-4 py-3 text-center backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-slot ${className}`}
+      className={`no-tap-flash bevel-out group flex items-center justify-center rounded-[6px] border-2 border-ink/55 bg-slot/85 px-4 py-3 text-center backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-slot ${className}`}
     >
       <span className="text-[12px] font-medium text-ink sm:text-[13px]">{reminders.banner}</span>
-      <span className="ml-2 grid size-4 shrink-0 place-items-center rounded-full bg-rosewood text-[9px] font-bold text-cream">
+      <span className="ml-2 grid size-4 shrink-0 place-items-center rounded-full bg-rosewood text-[9px] font-bold text-ink">
         {reminders.items.length}
       </span>
     </button>
@@ -107,11 +98,21 @@ function FeaturedBlock({ onOpen, className = '' }) {
       type="button"
       onClick={onOpen}
       title={featured.blurb}
-      className={`no-tap-flash group flex w-full flex-col items-center justify-center gap-1 rounded-[8px] border border-ink/40 bg-slot/80 px-4 text-center backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-slot ${className}`}
+      className={`no-tap-flash bevel-out group flex w-full flex-col items-center justify-center gap-1 rounded-[6px] border-2 border-ink/55 bg-slot/85 px-4 text-center backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-slot ${className}`}
     >
       <Eyebrow className="opacity-70">{featured.eyebrow}</Eyebrow>
       <span className="text-[13px] font-medium text-ink sm:text-sm">{featured.label}</span>
     </button>
+  )
+}
+
+/** Scanlines + vignette, sat over the desktop but under the windows. */
+function CrtOverlay() {
+  return (
+    <div className="pointer-events-none absolute inset-0 z-40" aria-hidden="true">
+      <div className="crt absolute inset-0" />
+      <div className="crt-vignette absolute inset-0" />
+    </div>
   )
 }
 
@@ -124,12 +125,12 @@ export function Desktop() {
   }
 
   return (
-    <div className="min-h-dvh bg-taupe/35 bg-dotgrid p-0 lg:h-dvh lg:overflow-hidden lg:p-5">
+    <div className="min-h-dvh bg-olive-900 bg-dotgrid p-0 lg:h-dvh lg:overflow-hidden lg:p-5">
       {/* the "screen" */}
-      <div className="relative flex min-h-dvh flex-col overflow-hidden border-ink/40 bg-sand-white lg:h-full lg:min-h-0 lg:rounded-[10px] lg:border lg:shadow-window">
+      <div className="relative flex min-h-dvh flex-col overflow-hidden border-ink/60 bg-olive-300 lg:h-full lg:min-h-0 lg:rounded-[10px] lg:border-2 lg:shadow-window">
         <DesktopBackground />
 
-        <ChromeBar />
+        <MenuBar onOpen={open} />
 
         {/* ============================ ≥ lg: real desktop ==================== */}
         <main className="relative z-10 hidden flex-1 lg:block">
@@ -155,6 +156,11 @@ export function Desktop() {
             <Title />
             <FeaturedBlock onOpen={openFeatured} className="h-[140px] xl:h-[165px]" />
           </div>
+
+          {/* Y2K trinkets, tucked into the empty corners */}
+          <ConstructionBadge className="absolute top-[6%] left-[27%]" />
+          <HitCounter className="absolute bottom-[6%] left-[4%]" />
+          <BestViewedBadge className="absolute right-[4%] bottom-[7%]" />
         </main>
 
         {/* ====================== < lg: simplified stacked layout ============= */}
@@ -177,10 +183,22 @@ export function Desktop() {
               />
             ))}
           </div>
+
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
+            <ConstructionBadge />
+            <HitCounter />
+            <BestViewedBadge />
+          </div>
         </main>
 
+        <Ticker className="relative z-10 mx-3 mb-2 sm:mx-5" />
+
         <Dock items={DOCK_ITEMS} onOpen={open} />
+
+        <CrtOverlay />
       </div>
+
+      <CursorSparkles />
     </div>
   )
 }

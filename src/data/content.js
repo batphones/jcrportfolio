@@ -17,6 +17,31 @@ export const site = {
   title: 'PORTFOLIO.', // big bold title
 }
 
+/** Menu-bar shortcuts, left to right. Each one opens its window. */
+export const menuBar = [
+  { label: 'about', kind: 'about' },
+  { label: 'gallery', kind: 'gallery' },
+  { label: 'faq', kind: 'faq' },
+  { label: 'comms', kind: 'comms' },
+]
+
+/** Scrolling marquee above the dock — pure Y2K status strip. */
+export const ticker = [
+  'PLACEHOLDER — welcome to my corner of the web',
+  'commissions: OPEN / CLOSED',
+  'new pieces in the gallery',
+  'thanks for visiting !!',
+  'best viewed with your speakers on',
+]
+
+/** Y2K desktop trinkets. Decorative — change the copy or drop them entirely. */
+export const trinkets = {
+  visitorCount: 131072, // fake hit counter seed
+  visitorLabel: 'visitors',
+  construction: 'under construction',
+  bestViewed: 'best viewed at 1024 x 768',
+}
+
 /** The "reminders!" notification banner on the desktop. */
 export const reminders = {
   banner: 'reminders!',
@@ -123,7 +148,7 @@ export const faq = [
 export const socials = [
   { id: 's1', name: 'Instagram', handle: '@placeholder', href: null, hue: 'rosewood' },
   { id: 's2', name: 'Twitter / X', handle: '@placeholder', href: null, hue: 'olive' },
-  { id: 's3', name: 'Bluesky', handle: '@placeholder', href: null, hue: 'teal' },
+  { id: 's3', name: 'Bluesky', handle: '@placeholder', href: null, hue: 'cream' },
   { id: 's4', name: 'Tumblr', handle: '@placeholder', href: null, hue: 'khaki' },
   { id: 's5', name: 'Ko-fi', handle: '@placeholder', href: null, hue: 'blush' },
   { id: 's6', name: 'Discord', handle: 'placeholder#0000', href: null, hue: 'taupe' },

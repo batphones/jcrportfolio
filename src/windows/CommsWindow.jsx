@@ -5,7 +5,7 @@ import { Eyebrow } from '../components/primitives'
 const HUES = {
   rosewood: 'bg-rosewood',
   olive: 'bg-olive',
-  teal: 'bg-teal',
+  cream: 'bg-cream',
   khaki: 'bg-khaki',
   blush: 'bg-blush',
   taupe: 'bg-taupe',

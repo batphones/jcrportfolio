@@ -16,12 +16,24 @@
   --color-blush: #e6d4c8;
   --color-rosewood: #c9a08f;
 
-  /* Window chrome + UI accents (derived, kept separate from the moodboard) */
-  --color-teal: #7fcdc2;
-  --color-teal-deep: #5fb6aa;
+  /* Single-hue olive ramp — drives the wallpaper gradient and the window
+     chrome, so every surface stays inside the moodboard. */
+  --color-olive-50: #f0f3e0;
+  --color-olive-100: #dfe5c6;
+  --color-olive-200: #c9d1a8;
+  --color-olive-300: #adb589;
+  --color-olive-400: #939a6e;
+  --color-olive-500: #8c9169; /* = --color-olive, the moodboard swatch */
+  --color-olive-600: #676d47;
+  --color-olive-700: #4f5535;
+  --color-olive-800: #3a4026;
+  --color-olive-900: #272c18;
+
   --color-ink: #2c2823;
-  --color-slot: #b9b4ac; /* the gray "content slot" boxes in the wireframe */
-  --color-slot-soft: #cdc8c0;
+  /* The wireframe's neutral "content slot" boxes, pulled into the palette:
+     taupe and blush rather than an off-palette gray. */
+  --color-slot: #cbbeb2;
+  --color-slot-soft: #e6d4c8;
 
   /* Artwork placeholders — swap for real thumbnails later */
   --color-art: #7c4dff;
@@ -104,15 +116,20 @@
    and a field of twinkling stars. Everything animates transform/opacity only,
    so it stays on the compositor and never repaints the page.
    ------------------------------------------------------------------ */
+/* One hue, walked down the ramp — a proper saturated wallpaper rather than a
+   pale fade. Light at the top, deep olive at the bottom. */
 .bg-desk {
-  background:
-    linear-gradient(
-      160deg,
-      var(--color-blush-cream) 0%,
-      var(--color-sand-white) 38%,
-      var(--color-cream) 72%,
-      var(--color-blush) 100%
-    );
+  background: linear-gradient(
+    168deg,
+    var(--color-olive-200) 0%,
+    var(--color-olive-300) 14%,
+    var(--color-olive-400) 30%,
+    var(--color-olive-500) 46%,
+    var(--color-olive-600) 62%,
+    var(--color-olive-700) 78%,
+    var(--color-olive-800) 91%,
+    var(--color-olive-900) 100%
+  );
 }
 
 .blob {
@@ -193,6 +210,95 @@
   will-change: transform, opacity;
 }
 
+/* ------------------------------------------------------------------
+   Y2K desktop furniture
+   ------------------------------------------------------------------ */
+
+/* Chunky 3D bevel, the way every OS drew a button in 1999. */
+.bevel-out {
+  box-shadow:
+    inset 1.5px 1.5px 0 rgba(255, 255, 255, 0.5),
+    inset -1.5px -1.5px 0 rgba(44, 40, 35, 0.35);
+}
+
+.bevel-in {
+  box-shadow:
+    inset 1.5px 1.5px 0 rgba(44, 40, 35, 0.38),
+    inset -1.5px -1.5px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* CRT scanlines + vignette, laid over the whole screen. */
+.crt {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(44, 40, 35, 0.055) 0px,
+    rgba(44, 40, 35, 0.055) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+.crt-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 52%,
+    rgba(52, 56, 39, 0.16) 82%,
+    rgba(52, 56, 39, 0.34) 100%
+  );
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 34s linear infinite;
+  will-change: transform;
+}
+
+@keyframes blink {
+  0%,
+  46% {
+    opacity: 1;
+  }
+  50%,
+  96% {
+    opacity: 0.18;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-blink {
+  animation: blink 1.4s steps(1, end) infinite;
+}
+
+/* Cursor trail sparkle — spawns, drifts, fades, then unmounts. */
+@keyframes sparkle-out {
+  0% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1) rotate(80deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.25) rotate(160deg);
+  }
+}
+
+.animate-sparkle-out {
+  animation: sparkle-out 800ms ease-out forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -207,7 +313,9 @@
   .animate-drift-b,
   .animate-drift-c,
   .animate-drift-d,
-  .animate-twinkle {
+  .animate-twinkle,
+  .animate-marquee,
+  .animate-blink {
     animation: none !important;
   }
 

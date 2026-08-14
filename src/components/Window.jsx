@@ -86,7 +86,7 @@ export function Window({
       aria-label={title}
       className={[
         'window-shell no-tap-flash pointer-events-auto flex flex-col overflow-hidden',
-        'rounded-[10px] border border-ink/70 bg-sand-white shadow-window',
+        'bevel-out rounded-[8px] border-2 border-ink/75 bg-sand-white shadow-window',
         draggable ? '' : 'inset-x-3 top-[7vh] bottom-[7vh]',
       ].join(' ')}
       style={placement}
@@ -101,14 +101,15 @@ export function Window({
         ref={headerRef}
         onPointerDown={startDrag}
         className={[
-          'relative flex shrink-0 items-center justify-center border-b border-ink/70 bg-teal px-11 py-2',
+          'relative flex shrink-0 items-center justify-center border-b-2 border-ink/75 px-11 py-2',
+          'bg-linear-to-b from-olive-500 to-olive-700',
           /* select-none/touch-none so dragging the bar moves the window
              instead of selecting the title text or scrolling the page */
           'touch-none select-none',
           draggable ? 'cursor-grab active:cursor-grabbing' : '',
         ].join(' ')}
       >
-        <h2 className="truncate text-center text-[15px] font-bold tracking-tight text-ink sm:text-lg">
+        <h2 className="truncate text-center text-[15px] font-bold tracking-tight text-olive-50 [text-shadow:0_1px_0_rgba(44,40,35,0.45)] sm:text-lg">
           {title}
         </h2>
 
@@ -117,7 +118,7 @@ export function Window({
           type="button"
           onClick={onClose}
           aria-label={`Close ${title}`}
-          className="absolute top-1/2 right-2 grid size-7 -translate-y-1/2 place-items-center rounded-[4px] border border-ink/70 bg-rosewood text-ink transition hover:bg-[#bd6b53] active:scale-95"
+          className="bevel-out absolute top-1/2 right-2 grid size-7 -translate-y-1/2 place-items-center rounded-[3px] border-2 border-ink/75 bg-rosewood text-ink transition hover:bg-[#d8b3a4] active:scale-95 active:[box-shadow:inset_1.5px_1.5px_0_rgba(44,40,35,0.38)]"
         >
           <svg viewBox="0 0 16 16" className="size-4" aria-hidden="true">
             <path

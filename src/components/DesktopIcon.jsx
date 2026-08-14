@@ -18,7 +18,7 @@ function FolderGlyph() {
         d="M2 10a5 5 0 0 1 5-5h15.6a4 4 0 0 1 2.9 1.2L30 11h27a5 5 0 0 1 5 5v27a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5z"
         fill="none"
         stroke="currentColor"
-        strokeOpacity="0.5"
+        strokeOpacity="0.7"
         strokeWidth="1.5"
       />
     </svg>
@@ -71,7 +71,10 @@ export function DesktopIcon({
         )}
       </span>
 
-      <span className="max-w-full rounded-[3px] px-1.5 py-0.5 text-center text-[11px] leading-tight font-medium break-words text-ink transition-colors group-hover:bg-ink group-hover:text-cream group-focus-visible:bg-ink group-focus-visible:text-cream sm:text-[12px]">
+      {/* Ink plate behind the label: the wallpaper runs pale at the top and
+          deep olive at the bottom, so plain ink text would lose contrast at
+          one end or the other. */}
+      <span className="max-w-full rounded-[3px] bg-ink/55 px-1.5 py-0.5 text-center text-[11px] leading-tight font-medium break-words text-olive-50 backdrop-blur-[2px] transition-colors group-hover:bg-ink group-focus-visible:bg-ink sm:text-[12px]">
         {label}
       </span>
     </button>
