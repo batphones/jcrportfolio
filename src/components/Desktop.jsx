@@ -151,7 +151,7 @@ export function Desktop() {
           <div className="absolute top-[16%] right-[3%] w-[32%] max-w-[380px]">
             <RemindersBanner onOpen={() => open('reminders')} className="relative w-full" />
             {/* rendered after the banner, so he rests on top of it */}
-            <Chibi name="peek" width={118} className="bottom-[calc(100%-34px)] left-[6%]" />
+            <Chibi name="peek" width={118} className="-left-[2%] bottom-[calc(100%-34px)]" />
           </div>
 
           {ICONS.map((icon) => (
@@ -174,7 +174,7 @@ export function Desktop() {
                 on the panel's top edge rather than tucked behind it. */}
             <div className="relative w-full">
               <FeaturedBlock onOpen={openFeatured} className="relative h-[140px] xl:h-[165px]" />
-              <Chibi name="sit" width={148} bob={6.5} className="right-[6%] bottom-[calc(100%-44px)]" />
+              <Chibi name="sit" width={148} bob={6.5} className="left-[6%] bottom-[calc(100%-44px)]" />
             </div>
           </div>
 
@@ -197,7 +197,7 @@ export function Desktop() {
 
           <div className="relative mt-8 w-full">
             <FeaturedBlock onOpen={openFeatured} className="relative h-[110px]" />
-            <Chibi name="sit" width={100} bob={6.5} className="right-[5%] bottom-[calc(100%-38px)]" />
+            <Chibi name="sit" width={100} bob={6.5} className="left-[5%] bottom-[calc(100%-38px)]" />
           </div>
 
           <div className="grid grid-cols-3 justify-items-center gap-y-5 sm:grid-cols-4">
