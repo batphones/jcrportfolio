@@ -24,11 +24,11 @@ const ICONS = [
   },
   {
     id: 'jpeg1',
-    label: 'jpeg1',
+    label: 'blue_dress.jpeg',
     kind: 'gallery',
     variant: 'art',
-    tall: true,
-    title: 'Open the gallery',
+    src: '/art/blue-dress.jpeg',
+    title: 'Blue dress — open the gallery',
     pos: 'left-[13.5%] top-[5%]',
   },
   { id: 'faq', label: 'faq', kind: 'faq', variant: 'folder', pos: 'left-[1.5%] top-[53%]' },
@@ -41,11 +41,11 @@ const ICONS = [
   },
   {
     id: 'jpeg2',
-    label: 'jpeg2',
+    label: 'annelis.jpeg',
     kind: 'gallery',
     variant: 'art',
-    tall: true,
-    title: 'Open the gallery',
+    src: '/art/annelis-nurse.jpeg',
+    title: 'Annelis — open the gallery',
     pos: 'right-[5%] top-[33%]',
   },
   {
@@ -174,6 +174,7 @@ export function Desktop() {
               label={icon.label}
               variant={icon.variant}
               tall={icon.tall}
+              src={icon.src}
               title={icon.title}
               onClick={() => open(icon.kind)}
               className={`absolute ${icon.pos}`}
@@ -220,6 +221,7 @@ export function Desktop() {
                 label={icon.label}
                 variant={icon.variant}
                 tall={false}
+                src={icon.src}
                 title={icon.title}
                 onClick={() => open(icon.kind)}
               />

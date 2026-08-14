@@ -31,22 +31,28 @@ function FolderGlyph() {
  *
  * `variant`
  *   folder — khaki folder glyph
- *   art    — purple artwork thumbnail placeholder
+ *   art    — an artwork thumbnail; pass `src` for a real piece, otherwise it
+ *            falls back to the purple placeholder block
  */
 export function DesktopIcon({
   label,
   variant = 'folder',
   tall = false,
+  src = null,
   onClick,
   title,
   className = '',
   size = 'md',
 }) {
+  /* A real thumbnail gets a width only, so its height follows the file's own
+     proportions — nothing about the artwork is cropped to fit a box. */
   const iconBox =
     variant === 'art'
-      ? tall
-        ? 'w-[62px] h-[86px] sm:w-[74px] sm:h-[104px]'
-        : 'w-[62px] h-[62px] sm:w-[74px] sm:h-[74px]'
+      ? src
+        ? 'w-[58px] sm:w-[70px]'
+        : tall
+          ? 'w-[62px] h-[86px] sm:w-[74px] sm:h-[104px]'
+          : 'w-[62px] h-[62px] sm:w-[74px] sm:h-[74px]'
       : size === 'sm'
         ? 'w-[52px] h-[42px] sm:w-[58px] sm:h-[46px]'
         : 'w-[64px] h-[52px] sm:w-[74px] sm:h-[58px]'
@@ -62,10 +68,17 @@ export function DesktopIcon({
         className={`${iconBox} shadow-icon block text-ink transition-transform duration-150 ease-out group-hover:-translate-y-0.5 group-hover:scale-[1.07] group-focus-visible:scale-[1.07] group-active:scale-[0.97]`}
       >
         {variant === 'art' ? (
-          <ArtBlock
-            alt={label}
-            className="transition-colors group-hover:bg-art-deep"
-          />
+          src ? (
+            <img
+              src={src}
+              alt={title ?? label}
+              decoding="async"
+              draggable={false}
+              className="block w-full rounded-[3px] border border-ink/60 transition-colors group-hover:border-ink"
+            />
+          ) : (
+            <ArtBlock alt={label} className="transition-colors group-hover:bg-art-deep" />
+          )
         ) : (
           <FolderGlyph />
         )}

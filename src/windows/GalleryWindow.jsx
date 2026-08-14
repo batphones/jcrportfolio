@@ -1,37 +1,52 @@
 import { artworks } from '../data/content'
-import { ArtBlock } from '../components/primitives'
 import { useWindows } from './WindowContext'
 
 /**
- * "gallery:" — masonry of artwork thumbnails, mixing tall and short tiles like
- * the wireframe. `span` from content.js drives tile height (1 = short,
- * 2 = tall) and `grid-flow-row-dense` backfills any gap a tall tile leaves, so
- * short tiles later in the list slot into the holes rather than leaving voids.
+ * "gallery:" — a justified grid, the way a photo gallery lays out.
  *
- * Clicking a tile opens a single-artwork window *on top of* this one; this
- * window stays open underneath.
+ * Each row's width is shared out in proportion to the pieces' aspect ratios
+ * (`flex-grow: ratio` against `flex-basis: 0`), which makes every piece in a
+ * row come out the same height and the row fill the window exactly. Nothing is
+ * cropped, letterboxed or padded — the artwork keeps its own proportions and
+ * there is no leftover space.
+ *
+ * Below `sm` the rows stack to one piece per line; four images across a phone
+ * would be thumbnails.
+ *
+ * Clicking a piece opens it in a window on top of this one, which stays open
+ * underneath.
  */
 export function GalleryWindow() {
   const { open } = useWindows()
+  const rows = [...new Set(artworks.map((art) => art.row))].sort((a, b) => a - b)
 
   return (
-    <div className="grid auto-rows-[78px] grid-flow-row-dense grid-cols-2 gap-2.5 sm:auto-rows-[92px] sm:grid-cols-3 lg:grid-cols-4">
-      {artworks.map((art) => (
-        <button
-          key={art.id}
-          type="button"
-          onClick={() => open('artwork', { artwork: art })}
-          title={`Open ${art.title}`}
-          style={{ gridRow: `span ${art.span}` }}
-          className="no-tap-flash group rounded-[4px] transition-transform duration-150 hover:scale-[1.03] focus-visible:scale-[1.03] active:scale-[0.99]"
-        >
-          <span className="sr-only">{`${art.title} — ${art.medium}, ${art.year}`}</span>
-          <ArtBlock
-            src={art.src}
-            alt={art.title}
-            className="transition-colors group-hover:border-ink/70 group-hover:bg-art-deep"
-          />
-        </button>
+    <div className="flex flex-col gap-2.5">
+      {rows.map((row) => (
+        <div key={row} className="flex flex-col gap-2.5 sm:flex-row">
+          {artworks
+            .filter((art) => art.row === row)
+            .map((art) => (
+              <button
+                key={art.id}
+                type="button"
+                onClick={() => open('artwork', { artwork: art })}
+                title={`Open ${art.title}`}
+                /* The ratio drives the flex share, so the row fills exactly. */
+                style={{ '--ratio': art.ratio }}
+                className="no-tap-flash group block min-w-0 rounded-[3px] transition-transform duration-150 hover:scale-[1.02] focus-visible:scale-[1.02] active:scale-[0.99] sm:[flex-basis:0] sm:[flex-grow:var(--ratio)]"
+              >
+                <img
+                  src={art.src}
+                  alt={`${art.title} — ${art.medium}`}
+                  loading="lazy"
+                  decoding="async"
+                  draggable={false}
+                  className="block w-full rounded-[3px] border border-ink/45 transition-colors group-hover:border-ink"
+                />
+              </button>
+            ))}
+        </div>
       ))}
     </div>
   )

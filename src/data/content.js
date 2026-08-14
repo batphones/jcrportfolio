@@ -117,31 +117,74 @@ export const about = {
 }
 
 /**
- * Gallery tiles. `span` drives the masonry height (1 = short, 2 = tall) so the
- * grid keeps the uneven rhythm from the wireframe.
+ * Gallery pieces — the real artwork, in /public/art/.
+ *
+ * `ratio` is the file's own width / height. The gallery lays each row out
+ * justified: widths are shared out in proportion to `ratio`, so a row fills
+ * the window edge to edge and every piece keeps its exact proportions —
+ * nothing is cropped, letterboxed, or padded.
+ *
+ * `row` groups them. Keep each row's ratios adding up to roughly the same
+ * total and the rows come out about the same height; the two rows below sum
+ * to 2.88 and 2.86.
  */
 export const artworks = [
-  { id: 'a1', title: 'PLACEHOLDER — piece 01', year: '2025', medium: 'digital illustration', span: 2, src: null },
-  { id: 'a2', title: 'PLACEHOLDER — piece 02', year: '2025', medium: 'character design', span: 1, src: null },
-  { id: 'a3', title: 'PLACEHOLDER — piece 03', year: '2025', medium: 'digital illustration', span: 1, src: null },
-  { id: 'a4', title: 'PLACEHOLDER — piece 04', year: '2024', medium: 'cover art', span: 2, src: null },
-  { id: 'a5', title: 'PLACEHOLDER — piece 05', year: '2024', medium: 'sketch', span: 1, src: null },
-  { id: 'a6', title: 'PLACEHOLDER — piece 06', year: '2024', medium: 'digital painting', span: 2, src: null },
-  { id: 'a7', title: 'PLACEHOLDER — piece 07', year: '2024', medium: 'character design', span: 1, src: null },
-  { id: 'a8', title: 'PLACEHOLDER — piece 08', year: '2023', medium: 'illustration', span: 1, src: null },
-  { id: 'a9', title: 'PLACEHOLDER — piece 09', year: '2023', medium: 'study', span: 2, src: null },
-  { id: 'a10', title: 'PLACEHOLDER — piece 10', year: '2023', medium: 'illustration', span: 1, src: null },
-  { id: 'a11', title: 'PLACEHOLDER — piece 11', year: '2023', medium: 'sketch', span: 1, src: null },
-  { id: 'a12', title: 'PLACEHOLDER — piece 12', year: '2022', medium: 'illustration', span: 1, src: null },
+  {
+    id: 'valerius',
+    title: 'Valerius Hawthorne',
+    medium: 'character reference',
+    src: '/art/valerius-hawthorne-ref.jpeg',
+    ratio: 1600 / 1112,
+    row: 1,
+  },
+  {
+    id: 'vyera-ref',
+    title: 'Vyera Thorne — Grimorium',
+    medium: 'character reference',
+    src: '/art/vyera-thorne-ref.jpeg',
+    ratio: 1600 / 1112,
+    row: 1,
+  },
+  {
+    id: 'blue-dress',
+    title: 'Blue dress',
+    medium: 'illustration',
+    src: '/art/blue-dress.jpeg',
+    ratio: 1112 / 1600,
+    row: 2,
+  },
+  {
+    id: 'annelis',
+    title: 'Annelis',
+    medium: 'portrait',
+    src: '/art/annelis-nurse.jpeg',
+    ratio: 1112 / 1600,
+    row: 2,
+  },
+  {
+    id: 'vyera-jump',
+    title: 'Vyera Thorne',
+    medium: 'illustration',
+    src: '/art/vyera-jump.jpeg',
+    ratio: 1112 / 1600,
+    row: 2,
+  },
+  {
+    id: 'jinx',
+    title: 'Jinx Lanchez',
+    medium: 'character reference',
+    src: '/art/jinx-lanchez-ref.jpeg',
+    ratio: 996 / 1280,
+    row: 2,
+  },
 ]
-
 
 /** The featured / pinned block in the middle of the desktop. */
 export const featured = {
   label: 'placeholder.',
   eyebrow: 'featured',
   blurb: 'PLACEHOLDER — pin a favourite piece or a short intro blurb here.',
-  artworkId: 'a1', // clicking the block opens this artwork
+  artworkId: 'valerius', // clicking the block opens this artwork
 }
 
 /** "faq" window. */

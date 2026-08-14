@@ -81,19 +81,21 @@ hidden below 1280px wide or 760px tall, where there is simply no lane left.
 Everything currently reads `PLACEHOLDER — …` so it's obvious what still needs
 replacing. You should not need to touch a component to fill the site in.
 
-To use real images:
+To add a gallery piece:
 
-1. Drop the file into `public/art/` (e.g. `public/art/my-piece.png`)
-2. Set `src: '/art/my-piece.png'` on the matching entry in `content.js`
+1. Drop the file into `public/art/`
+2. Add an entry to `artworks` in `content.js` with its `src`, its `ratio`
+   (the file's own width / height) and which `row` it belongs to
 
-Any entry left as `src: null` renders the coloured placeholder block instead, so
-the layout never breaks while it's half-filled.
+**The gallery is justified, not a grid.** Each row shares its width out in
+proportion to the pieces' `ratio` values, so every piece in a row ends up the
+same height and the row fills the window exactly — nothing is cropped,
+letterboxed or left as empty space. Keep each row's ratios adding up to roughly
+the same total and the rows come out about the same height too. Below `sm` the
+rows stack to one piece per line.
 
-The gallery's `span` field controls tile height in the masonry — `1` for a short
-tile, `2` for a tall one. The grid is dense-packed, so short tiles backfill the
-gaps tall ones leave. The current spans total 16, which fills exactly four rows
-at the desktop width; if you add or remove pieces, keeping the total a multiple
-of four will keep the last row flush.
+The artwork files themselves are untouched originals — no cropping or resizing.
+Thumbnails and the desktop icons size them in CSS only.
 
 ## Structure
 
