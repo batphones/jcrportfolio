@@ -54,7 +54,7 @@ const ICONS = [
     kind: 'comms',
     variant: 'folder',
     title: 'Socials & apps',
-    pos: 'right-[13%] top-[70%]',
+    pos: 'right-[3%] top-[70%]',
   },
 ]
 
@@ -138,8 +138,8 @@ export function Desktop() {
           {/* Free-floating chibis go first, so icons and badges paint in front
               of them. The two that perch *on top of* something are rendered
               after their panel instead — see below. */}
-          <Chibi name="kick" width={190} bob={7.5} className="top-[42%] right-[16%]" />
-          <Chibi name="crouch" width={148} bob={6} className="top-[58%] left-[18%]" />
+          <Chibi name="kick" width={190} bob={7.5} className="top-[47%] right-[14%]" />
+          <Chibi name="crouch" width={172} bob={6} className="top-[58%] left-[10%]" />
 
           {/* Centred under the featured block, sitting on the announcement bar:
               bottom-0 is <main>'s floor, and the ticker starts immediately

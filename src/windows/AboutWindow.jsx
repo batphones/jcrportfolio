@@ -1,9 +1,9 @@
 import { about, chibis } from '../data/content'
-import { ArtBlock, Eyebrow, ImagePlaceholder, Slot } from '../components/primitives'
+import { ImagePlaceholder, Slot } from '../components/primitives'
 
 /**
- * "about me:" — portrait on the left, two stacked info slots on the right.
- * Stacks to a single column on narrow windows / phones.
+ * "about me:" — portrait on the left, facts and the beach illustration on the
+ * right. Stacks to a single column on narrow windows / phones.
  */
 export function AboutWindow() {
   return (
@@ -24,7 +24,7 @@ export function AboutWindow() {
         />
       </div>
 
-      {/* right: facts + OC profiles */}
+      {/* right: facts, then the illustration on its own */}
       <div className="grid gap-3 sm:grid-rows-[minmax(0,1.35fr)_minmax(0,1fr)]">
         <Slot className="p-4">
           <ul className="flex h-full flex-col justify-center gap-2 text-center">
@@ -37,38 +37,15 @@ export function AboutWindow() {
           </ul>
         </Slot>
 
-        <Slot className="p-4">
-          <div className="flex h-full flex-col gap-3">
-            <div className="text-center">
-              <p className="text-[13px] font-bold text-ink sm:text-sm">
-                {about.ocProfiles.heading}
-              </p>
-              <p className="mt-1 text-[10px] leading-snug text-ink/65">{about.ocProfiles.blurb}</p>
-            </div>
-
-            {/* The beach illustration lives here — it's the one chibi that's a
-                full scene rather than a sticker, so it gets real space. */}
-            <img
-              src={chibis.beach.src}
-              alt={chibis.beach.alt}
-              loading="lazy"
-              decoding="async"
-              draggable={false}
-              className="mx-auto block w-full max-w-[280px] select-none"
-            />
-
-            <div className="grid flex-1 grid-cols-3 gap-2">
-              {about.ocProfiles.characters.map((oc) => (
-                <div key={oc.id} className="flex flex-col gap-1">
-                  <div className="min-h-[70px] flex-1">
-                    <ArtBlock src={oc.src} alt={`${oc.name} — ${oc.tag}`} />
-                  </div>
-                  <Eyebrow className="text-center">{oc.name}</Eyebrow>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Slot>
+        {/* Just the artwork — no panel, no heading, no tiles. */}
+        <img
+          src={chibis.beach.src}
+          alt={chibis.beach.alt}
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+          className="mx-auto block max-h-[300px] w-full max-w-[340px] object-contain select-none"
+        />
       </div>
     </div>
   )

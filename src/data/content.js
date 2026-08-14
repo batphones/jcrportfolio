@@ -115,15 +115,6 @@ export const about = {
     { label: 'Based in', value: 'PLACEHOLDER — city, country' },
     { label: 'Experience', value: 'PLACEHOLDER — X years / notable clients' },
   ],
-  ocProfiles: {
-    heading: 'OC Profiles!',
-    blurb: 'PLACEHOLDER — original characters. Each one can link to a ref sheet.',
-    characters: [
-      { id: 'oc1', name: 'OC ONE', tag: 'placeholder', src: null },
-      { id: 'oc2', name: 'OC TWO', tag: 'placeholder', src: null },
-      { id: 'oc3', name: 'OC THREE', tag: 'placeholder', src: null },
-    ],
-  },
 }
 
 /**
