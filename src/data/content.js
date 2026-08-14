@@ -73,13 +73,16 @@ export const artworks = [
   { id: 'a2', title: 'PLACEHOLDER — piece 02', year: '2025', medium: 'character design', span: 1, src: null },
   { id: 'a3', title: 'PLACEHOLDER — piece 03', year: '2025', medium: 'digital illustration', span: 1, src: null },
   { id: 'a4', title: 'PLACEHOLDER — piece 04', year: '2024', medium: 'cover art', span: 2, src: null },
-  { id: 'a5', title: 'PLACEHOLDER — piece 05', year: '2024', medium: 'sketch', span: 2, src: null },
+  { id: 'a5', title: 'PLACEHOLDER — piece 05', year: '2024', medium: 'sketch', span: 1, src: null },
   { id: 'a6', title: 'PLACEHOLDER — piece 06', year: '2024', medium: 'digital painting', span: 2, src: null },
   { id: 'a7', title: 'PLACEHOLDER — piece 07', year: '2024', medium: 'character design', span: 1, src: null },
-  { id: 'a8', title: 'PLACEHOLDER — piece 08', year: '2023', medium: 'illustration', span: 2, src: null },
+  { id: 'a8', title: 'PLACEHOLDER — piece 08', year: '2023', medium: 'illustration', span: 1, src: null },
   { id: 'a9', title: 'PLACEHOLDER — piece 09', year: '2023', medium: 'study', span: 2, src: null },
   { id: 'a10', title: 'PLACEHOLDER — piece 10', year: '2023', medium: 'illustration', span: 1, src: null },
+  { id: 'a11', title: 'PLACEHOLDER — piece 11', year: '2023', medium: 'sketch', span: 1, src: null },
+  { id: 'a12', title: 'PLACEHOLDER — piece 12', year: '2022', medium: 'illustration', span: 1, src: null },
 ]
+
 
 /** The featured / pinned block in the middle of the desktop. */
 export const featured = {

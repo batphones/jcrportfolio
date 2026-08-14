@@ -98,11 +98,120 @@
   will-change: transform, opacity;
 }
 
+/* ------------------------------------------------------------------
+   Animated desktop background
+   A static palette gradient, four slow-drifting colour blobs on top of it,
+   and a field of twinkling stars. Everything animates transform/opacity only,
+   so it stays on the compositor and never repaints the page.
+   ------------------------------------------------------------------ */
+.bg-desk {
+  background:
+    linear-gradient(
+      160deg,
+      var(--color-blush-cream) 0%,
+      var(--color-sand-white) 38%,
+      var(--color-cream) 72%,
+      var(--color-blush) 100%
+    );
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  will-change: transform;
+}
+
+@keyframes drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(8%, -6%, 0) scale(1.15);
+  }
+}
+
+@keyframes drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(-9%, 7%, 0) scale(0.92);
+  }
+}
+
+@keyframes drift-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.95);
+  }
+  50% {
+    transform: translate3d(6%, 9%, 0) scale(1.18);
+  }
+}
+
+@keyframes drift-d {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-7%, -8%, 0) scale(0.9);
+  }
+}
+
+.animate-drift-a {
+  animation: drift-a 26s ease-in-out infinite;
+}
+.animate-drift-b {
+  animation: drift-b 32s ease-in-out infinite;
+}
+.animate-drift-c {
+  animation: drift-c 29s ease-in-out infinite;
+}
+.animate-drift-d {
+  animation: drift-d 35s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.7) rotate(0deg);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1) rotate(30deg);
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle var(--twinkle-duration, 4s) ease-in-out infinite;
+  animation-delay: var(--twinkle-delay, 0s);
+  will-change: transform, opacity;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* Kill the looping ambient motion outright rather than snapping it to a
+     frozen mid-frame. The gradient and stars stay, they just hold still. */
+  .animate-drift-a,
+  .animate-drift-b,
+  .animate-drift-c,
+  .animate-drift-d,
+  .animate-twinkle {
+    animation: none !important;
+  }
+
+  .animate-twinkle {
+    opacity: 0.45;
   }
 }

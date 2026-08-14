@@ -3,9 +3,13 @@ import { ArtBlock } from '../components/primitives'
 import { useWindows } from './WindowContext'
 
 /**
- * "gallery:" — uneven grid of artwork thumbnails, matching the wireframe's
- * mix of tall and short tiles. Clicking a tile opens a single-artwork window
- * *on top of* this one; this window stays open underneath.
+ * "gallery:" — masonry of artwork thumbnails, mixing tall and short tiles like
+ * the wireframe. `span` from content.js drives tile height (1 = short,
+ * 2 = tall) and `grid-flow-row-dense` backfills any gap a tall tile leaves, so
+ * short tiles later in the list slot into the holes rather than leaving voids.
+ *
+ * Clicking a tile opens a single-artwork window *on top of* this one; this
+ * window stays open underneath.
  */
 export function GalleryWindow() {
   const { open } = useWindows()

@@ -114,8 +114,11 @@ export function WindowManager({ children }) {
     <WindowContext.Provider value={value}>
       {children}
 
-      {/* Window layer — sits above the desktop, only the windows catch clicks. */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+      {/* Window layer — sits above the desktop, only the windows catch clicks.
+          `fixed` makes this its own stacking context, so the per-window
+          z-indexes inside are local to it. The z-50 here is what actually lifts
+          every window above the desktop's own layered content. */}
+      <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
         <AnimatePresence>
           {/* Scrim: dims the desktop behind the windows. Deliberately click-
               through, so desktop icons stay usable while windows are open. */}

@@ -1,4 +1,5 @@
 import { artworks, featured, reminders, site } from '../data/content'
+import { DesktopBackground } from './DesktopBackground'
 import { DesktopIcon } from './DesktopIcon'
 import { Dock } from './Dock'
 import { Eyebrow } from './primitives'
@@ -61,7 +62,7 @@ const DOCK_ITEMS = [
 /** Decorative macOS traffic lights. */
 function ChromeBar() {
   return (
-    <div className="flex shrink-0 items-center gap-2 border-b border-ink/20 bg-blush-cream/80 px-3 py-2">
+    <div className="relative z-10 flex shrink-0 items-center gap-2 border-b border-ink/20 bg-blush-cream/80 px-3 py-2 backdrop-blur-sm">
       <span className="size-3 rounded-full border border-ink/20 bg-[#ED6A5E]" aria-hidden="true" />
       <span className="size-3 rounded-full border border-ink/20 bg-[#F5BF4F]" aria-hidden="true" />
       <span className="size-3 rounded-full border border-ink/20 bg-[#61C554]" aria-hidden="true" />
@@ -89,7 +90,7 @@ function RemindersBanner({ onOpen, className = '' }) {
     <button
       type="button"
       onClick={onOpen}
-      className={`no-tap-flash group flex items-center justify-center rounded-[8px] border border-ink/40 bg-slot/85 px-4 py-3 text-center transition hover:-translate-y-0.5 hover:bg-slot ${className}`}
+      className={`no-tap-flash group flex items-center justify-center rounded-[8px] border border-ink/40 bg-slot/80 px-4 py-3 text-center backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-slot ${className}`}
     >
       <span className="text-[12px] font-medium text-ink sm:text-[13px]">{reminders.banner}</span>
       <span className="ml-2 grid size-4 shrink-0 place-items-center rounded-full bg-rosewood text-[9px] font-bold text-cream">
@@ -106,7 +107,7 @@ function FeaturedBlock({ onOpen, className = '' }) {
       type="button"
       onClick={onOpen}
       title={featured.blurb}
-      className={`no-tap-flash group flex w-full flex-col items-center justify-center gap-1 rounded-[8px] border border-ink/40 bg-slot/85 px-4 text-center transition hover:-translate-y-0.5 hover:bg-slot ${className}`}
+      className={`no-tap-flash group flex w-full flex-col items-center justify-center gap-1 rounded-[8px] border border-ink/40 bg-slot/80 px-4 text-center backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-slot ${className}`}
     >
       <Eyebrow className="opacity-70">{featured.eyebrow}</Eyebrow>
       <span className="text-[13px] font-medium text-ink sm:text-sm">{featured.label}</span>
@@ -125,11 +126,13 @@ export function Desktop() {
   return (
     <div className="min-h-dvh bg-taupe/35 bg-dotgrid p-0 lg:h-dvh lg:overflow-hidden lg:p-5">
       {/* the "screen" */}
-      <div className="flex min-h-dvh flex-col overflow-hidden border-ink/40 bg-sand-white bg-grain lg:h-full lg:min-h-0 lg:rounded-[10px] lg:border lg:shadow-window">
+      <div className="relative flex min-h-dvh flex-col overflow-hidden border-ink/40 bg-sand-white lg:h-full lg:min-h-0 lg:rounded-[10px] lg:border lg:shadow-window">
+        <DesktopBackground />
+
         <ChromeBar />
 
         {/* ============================ ≥ lg: real desktop ==================== */}
-        <main className="relative hidden flex-1 lg:block">
+        <main className="relative z-10 hidden flex-1 lg:block">
           <RemindersBanner
             onOpen={() => open('reminders')}
             className="absolute top-[4%] right-[3%] w-[32%] max-w-[380px]"
@@ -155,7 +158,7 @@ export function Desktop() {
         </main>
 
         {/* ====================== < lg: simplified stacked layout ============= */}
-        <main className="flex flex-1 flex-col gap-6 px-4 py-8 lg:hidden">
+        <main className="relative z-10 flex flex-1 flex-col gap-6 px-4 py-8 lg:hidden">
           <Title />
 
           <RemindersBanner onOpen={() => open('reminders')} className="w-full" />

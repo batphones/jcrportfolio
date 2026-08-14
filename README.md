@@ -38,10 +38,11 @@ To use real images:
 Any entry left as `src: null` renders the coloured placeholder block instead, so
 the layout never breaks while it's half-filled.
 
-The gallery's `span` field controls tile height in the masonry grid — `1` for a
-short tile, `2` for a tall one. The current spans total a whole number of rows
-at the desktop width; if you add or remove pieces you may want to re-balance
-them so the last row fills.
+The gallery's `span` field controls tile height in the masonry — `1` for a short
+tile, `2` for a tall one. The grid is dense-packed, so short tiles backfill the
+gaps tall ones leave. The current spans total 16, which fills exactly four rows
+at the desktop width; if you add or remove pieces, keeping the total a multiple
+of four will keep the last row flush.
 
 ## Structure
 
