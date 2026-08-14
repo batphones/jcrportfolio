@@ -40,8 +40,13 @@ the About window. They are the **original files**, altered only by:
 
 1. flood-filling the white background to transparent, starting from the image
    border — so whites *inside* the drawing (shirts, skin, the thought bubble)
-   are never touched, and
-2. cropping away the resulting empty margin.
+   are never touched;
+2. un-matting the anti-aliased rim: the pixels where the linework was blended
+   into the white page are a mix of ink and white, so cutting them at a hard
+   threshold leaves a pale halo. Coverage is estimated from how dark each rim
+   pixel is, then the white is divided back out — recovering the ink colour at
+   partial alpha, which is what the stroke actually looked like; and
+3. cropping away the resulting empty margin.
 
 No scaling, mirroring, recolouring or redrawing. Every size on screen is applied
 in CSS at display time. `src/components/Chibi.jsx` deliberately has no flip or

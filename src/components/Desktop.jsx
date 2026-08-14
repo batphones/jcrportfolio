@@ -37,7 +37,7 @@ const ICONS = [
     label: 'gallery',
     kind: 'gallery',
     variant: 'folder',
-    pos: 'right-[14%] top-[13%]',
+    pos: 'right-[16%] top-[34%]',
   },
   {
     id: 'jpeg2',
@@ -46,7 +46,7 @@ const ICONS = [
     variant: 'art',
     tall: true,
     title: 'Open the gallery',
-    pos: 'right-[7.5%] top-[34%]',
+    pos: 'right-[5%] top-[33%]',
   },
   {
     id: 'comms',
@@ -54,7 +54,7 @@ const ICONS = [
     kind: 'comms',
     variant: 'folder',
     title: 'Socials & apps',
-    pos: 'right-[5.5%] top-[70%]',
+    pos: 'right-[13%] top-[70%]',
   },
 ]
 
@@ -135,19 +135,24 @@ export function Desktop() {
 
         {/* ============================ ≥ lg: real desktop ==================== */}
         <main className="relative z-10 hidden flex-1 lg:block">
-          {/* Chibis go first: later siblings (icons, banners, trinkets) then
-              paint in front of them, and each one is click-through anyway. */}
-          <Chibi name="peek" width={130} className="right-[26%] bottom-0 translate-y-[26%]" />
-          <Chibi name="kick" width={190} bob={7.5} className="top-[52%] right-[13%]" />
-          <Chibi name="crouch" width={148} bob={6} className="top-[68%] left-[16%]" />
-          {/* Bottom of the screen, looking up. The ticker and dock are later
-              siblings of <main>, so they crop her as she rises past them. */}
-          <Chibi name="closeup" width={230} className="bottom-0 left-[26%] translate-y-[32%]" />
+          {/* Free-floating chibis go first, so icons and badges paint in front
+              of them. The two that perch *on top of* something are rendered
+              after their panel instead — see below. */}
+          <Chibi name="kick" width={190} bob={7.5} className="top-[42%] right-[16%]" />
+          <Chibi name="crouch" width={148} bob={6} className="top-[58%] left-[18%]" />
 
-          <RemindersBanner
-            onOpen={() => open('reminders')}
-            className="absolute top-[4%] right-[3%] w-[32%] max-w-[380px]"
-          />
+          {/* Centred under the featured block, sitting on the announcement bar:
+              bottom-0 is <main>'s floor, and the ticker starts immediately
+              below it. */}
+          <Chibi name="closeup" width={200} className="bottom-0 left-1/2 -translate-x-1/2" />
+
+          {/* The banner sits lower than the wireframe's so the chibi leaning on
+              it has somewhere to go without colliding with the menu bar. */}
+          <div className="absolute top-[16%] right-[3%] w-[32%] max-w-[380px]">
+            <RemindersBanner onOpen={() => open('reminders')} className="relative w-full" />
+            {/* rendered after the banner, so he rests on top of it */}
+            <Chibi name="peek" width={118} className="bottom-[calc(100%-34px)] left-[6%]" />
+          </div>
 
           {ICONS.map((icon) => (
             <DesktopIcon
@@ -162,15 +167,14 @@ export function Desktop() {
           ))}
 
           {/* centre column: title + featured block */}
-          <div className="absolute top-[45%] left-1/2 flex w-[44vw] max-w-[560px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-14">
+          <div className="absolute top-[45%] left-1/2 flex w-[44vw] max-w-[560px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-24">
             <Title />
 
-            {/* The chibi is a sibling *before* the block and the block is
-                `relative`, so plain DOM order layers her behind it — she reads
-                as sitting behind the panel, leaning on its top edge. */}
+            {/* She comes *after* the block, so she sits on top of it — perched
+                on the panel's top edge rather than tucked behind it. */}
             <div className="relative w-full">
-              <Chibi name="sit" width={172} bob={6.5} className="-left-[12%] bottom-[calc(100%-62px)]" />
               <FeaturedBlock onOpen={openFeatured} className="relative h-[140px] xl:h-[165px]" />
+              <Chibi name="sit" width={148} bob={6.5} className="right-[6%] bottom-[calc(100%-44px)]" />
             </div>
           </div>
 
@@ -184,11 +188,16 @@ export function Desktop() {
         <main className="relative z-10 flex flex-1 flex-col gap-6 px-4 py-8 lg:hidden">
           <Title />
 
-          <RemindersBanner onOpen={() => open('reminders')} className="w-full" />
+          {/* The mt on each wrapper is the headroom its perched chibi needs:
+              without it they ride up over the title / the banner above. */}
+          <div className="relative mt-10 w-full">
+            <RemindersBanner onOpen={() => open('reminders')} className="relative w-full" />
+            <Chibi name="peek" width={84} className="bottom-[calc(100%-38px)] left-[5%]" />
+          </div>
 
           <div className="relative mt-8 w-full">
-            <Chibi name="sit" width={118} bob={6.5} className="bottom-[calc(100%-58px)] left-[4%]" />
             <FeaturedBlock onOpen={openFeatured} className="relative h-[110px]" />
+            <Chibi name="sit" width={100} bob={6.5} className="right-[5%] bottom-[calc(100%-38px)]" />
           </div>
 
           <div className="grid grid-cols-3 justify-items-center gap-y-5 sm:grid-cols-4">
@@ -204,6 +213,11 @@ export function Desktop() {
             ))}
           </div>
 
+          <div className="relative h-[124px]">
+            <Chibi name="crouch" width={104} bob={6} className="bottom-0 left-[5%]" />
+            <Chibi name="kick" width={112} bob={7.5} className="right-[5%] bottom-0" />
+          </div>
+
           <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
             <ConstructionBadge />
             <HitCounter />
@@ -211,8 +225,9 @@ export function Desktop() {
           </div>
 
           {/* Same idea as the desktop: she peeks up from behind the ticker. */}
-          <div className="relative mt-6 h-[140px]">
-            <Chibi name="closeup" width={150} className="bottom-0 left-1/2 -translate-x-1/2" />
+          {/* centred, and the ticker sits directly under <main> */}
+          <div className="relative mt-6 h-[150px]">
+            <Chibi name="closeup" width={160} className="bottom-0 left-1/2 -translate-x-1/2" />
           </div>
         </main>
 
