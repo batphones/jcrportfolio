@@ -1,0 +1,108 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Design tokens — "Earthy Tones" + "Soft Sand"
+   Declared in @theme so Tailwind generates utilities (bg-cream, text-olive…)
+   AND exposes each one as a plain CSS custom property on :root.
+   ------------------------------------------------------------------ */
+@theme {
+  /* Moodboard palette */
+  --color-olive: #8c9169;
+  --color-khaki: #c9c17a;
+  --color-cream: #e8e4c9;
+  --color-sand-white: #e9e7e1;
+  --color-taupe: #cbbeb2;
+  --color-blush-cream: #f2e8dd;
+  --color-blush: #e6d4c8;
+  --color-rosewood: #c9a08f;
+
+  /* Window chrome + UI accents (derived, kept separate from the moodboard) */
+  --color-teal: #7fcdc2;
+  --color-teal-deep: #5fb6aa;
+  --color-ink: #2c2823;
+  --color-slot: #b9b4ac; /* the gray "content slot" boxes in the wireframe */
+  --color-slot-soft: #cdc8c0;
+
+  /* Artwork placeholders — swap for real thumbnails later */
+  --color-art: #7c4dff;
+  --color-art-deep: #6435e8;
+
+  --font-mono:
+    ui-monospace, 'SF Mono', 'SFMono-Regular', Menlo, Monaco, 'Cascadia Mono',
+    'Roboto Mono', 'Courier New', monospace;
+  --font-display: 'Hoefler Text', 'Iowan Old Style', Palatino, 'Palatino Linotype', Georgia, serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    /* The whole design is a single light "desktop". Declaring the scheme stops
+       browsers auto-darkening the page for viewers whose OS is in dark mode. */
+    color-scheme: light;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-mono);
+    color: var(--color-ink);
+    background: var(--color-sand-white);
+    /* The page itself never scrolls — the desktop owns the viewport. */
+    overscroll-behavior: none;
+  }
+
+  /* Visible focus ring for keyboard users, suppressed for mouse clicks. */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+@layer utilities {
+  /* Subtle dot-grid, like the wireframe canvas */
+  .bg-dotgrid {
+    background-image: radial-gradient(rgba(44, 40, 35, 0.13) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  /* Faint paper noise so the large cream fields aren't flat.
+     Keep the opacity low — this tiles across the whole screen, and anything
+     heavier reads as a gray cast rather than as texture. */
+  .bg-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  }
+
+  .shadow-window {
+    box-shadow:
+      0 1px 1px rgba(44, 40, 35, 0.08),
+      0 10px 24px -6px rgba(44, 40, 35, 0.28),
+      0 30px 60px -20px rgba(44, 40, 35, 0.3);
+  }
+
+  .shadow-icon {
+    filter: drop-shadow(0 2px 3px rgba(44, 40, 35, 0.22));
+  }
+
+  /* Kills the iOS/Android tap flash on the many click targets */
+  .no-tap-flash {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Windows only animate transform/opacity, so hint the compositor. */
+.window-shell {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
