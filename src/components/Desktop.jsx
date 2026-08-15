@@ -202,8 +202,10 @@ export function Desktop() {
         <main className="relative z-10 flex flex-1 flex-col gap-6 px-4 py-8 lg:hidden">
           <Title />
 
-          {/* The mt on each wrapper is the headroom its perched chibi needs:
-              without it they ride up over the title / the banner above. */}
+          {/* Chibis alternate sides down the column — left, right, left, right,
+              then centred at the bottom — so the scroll doesn't stack them all
+              against one edge. The mt on each perched wrapper is the headroom
+              that chibi needs; without it they ride up over the block above. */}
           <div className="relative mt-10 w-full">
             <RemindersBanner onOpen={() => open('reminders')} className="relative w-full" />
             <Chibi name="peek" width={84} className="bottom-[calc(100%-38px)] left-[5%]" />
@@ -211,7 +213,7 @@ export function Desktop() {
 
           <div className="relative mt-8 w-full">
             <FeaturedBlock onOpen={openFeatured} className="relative h-[110px]" />
-            <Chibi name="sit" width={100} bob={6.5} className="left-[5%] bottom-[calc(100%-38px)]" />
+            <Chibi name="sit" width={100} bob={6.5} className="right-[5%] bottom-[calc(100%-38px)]" />
           </div>
 
           <div className="grid grid-cols-3 justify-items-center gap-y-5 sm:grid-cols-4">
@@ -228,8 +230,11 @@ export function Desktop() {
             ))}
           </div>
 
-          <div className="relative h-[124px]">
+          <div className="relative h-[120px]">
             <Chibi name="crouch" width={104} bob={6} className="bottom-0 left-[5%]" />
+          </div>
+
+          <div className="relative h-[124px]">
             <Chibi name="kick" width={112} bob={7.5} className="right-[5%] bottom-0" />
           </div>
 
