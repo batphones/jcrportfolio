@@ -108,11 +108,11 @@ export const about = {
   /* Profile photo / illustration. Set `src` to show a real image. */
   portrait: { src: null, alt: 'PLACEHOLDER — profile photo or self-illustration' },
   facts: [
-    { label: 'Name', value: 'PLACEHOLDER — your name / alias' },
-    { label: 'Apps Used', value: 'PLACEHOLDER — Procreate, CSP, Blender…' },
-    { label: 'Short Description', value: 'PLACEHOLDER — one line on what you make' },
-    { label: 'Based in', value: 'PLACEHOLDER — city, country' },
-    { label: 'Experience', value: 'PLACEHOLDER — X years / notable clients' },
+    { label: 'Name', value: 'Jing' },
+    { label: 'Apps Used', value: 'Adobe Fresco' },
+    { label: 'Short Description', value: 'i love drawing ocs!!! heehee' },
+    { label: 'Based in', value: 'Indonesia' },
+    { label: 'Experience', value: 'uhhhh gulp' },
   ],
 }
 
@@ -212,16 +212,20 @@ export const faq = [
 ]
 
 /**
- * "comms" window — apps-as-folders. `href: null` renders a disabled tile so
- * nothing links to a dead page before you fill the real URL in.
+ * "comms" window — apps-as-folders.
+ *
+ * `href` is what makes a tile a link. Discord has none because a username
+ * isn't a profile URL — that tile is there to be read, not clicked.
  */
 export const socials = [
-  { id: 's1', name: 'Instagram', handle: '@placeholder', href: null, hue: 'rosewood' },
-  { id: 's2', name: 'Twitter / X', handle: '@placeholder', href: null, hue: 'olive' },
-  { id: 's3', name: 'Bluesky', handle: '@placeholder', href: null, hue: 'cream' },
-  { id: 's4', name: 'Tumblr', handle: '@placeholder', href: null, hue: 'khaki' },
-  { id: 's5', name: 'Ko-fi', handle: '@placeholder', href: null, hue: 'blush' },
-  { id: 's6', name: 'Discord', handle: 'placeholder#0000', href: null, hue: 'taupe' },
+  {
+    id: 'instagram',
+    name: 'Instagram',
+    handle: '@jinglecatrock',
+    href: 'https://instagram.com/jinglecatrock',
+    hue: 'rosewood',
+  },
+  { id: 'discord', name: 'Discord', handle: 'jinglecatrock', href: null, hue: 'olive' },
 ]
 
 /** "contact" window. */

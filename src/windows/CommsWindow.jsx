@@ -13,15 +13,18 @@ const HUES = {
 
 /**
  * "comms:" — socials laid out as app tiles ("apps as folders" in the
- * wireframe). Entries with no href yet render as disabled tiles rather than
- * linking somewhere broken.
+ * wireframe).
+ *
+ * A tile with an `href` is a link out; one without is a plain tile, because
+ * some handles (a Discord username) aren't a URL you can visit. Both are real
+ * content, so neither is dimmed.
  */
 export function CommsWindow() {
   return (
     <div className="flex flex-col gap-3">
       <Eyebrow>find me elsewhere</Eyebrow>
 
-      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
         {socials.map((social) => {
           const tile = (
             <>
@@ -34,10 +37,8 @@ export function CommsWindow() {
                 {social.name.charAt(0)}
               </span>
               <span className="min-w-0">
-                <span className="block truncate text-[12px] font-bold text-ink">
-                  {social.name}
-                </span>
-                <span className="block truncate text-[10px] text-ink/60">{social.handle}</span>
+                <span className="block truncate text-[12px] font-bold text-ink">{social.name}</span>
+                <span className="block truncate text-[11px] text-ink/65">{social.handle}</span>
               </span>
             </>
           )
@@ -56,21 +57,12 @@ export function CommsWindow() {
               {tile}
             </a>
           ) : (
-            <div
-              key={social.id}
-              className={`${base} opacity-60`}
-              title="PLACEHOLDER — add a URL in src/data/content.js"
-            >
+            <div key={social.id} className={base}>
               {tile}
             </div>
           )
         })}
       </div>
-
-      <p className="text-[10px] leading-relaxed text-ink/55">
-        PLACEHOLDER — tiles without a URL are shown faded. Add <code>href</code> values in{' '}
-        <code>src/data/content.js</code> to activate them.
-      </p>
     </div>
   )
 }
